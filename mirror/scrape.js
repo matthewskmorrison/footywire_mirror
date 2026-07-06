@@ -3,8 +3,12 @@ const fs = require('fs');
 
 (async () => {
   const browser = await chromium.launch({
-    headless: false,               // Cloudflare hates headless browsers
-    args: ['--disable-blink-features=AutomationControlled']
+    headless: true,
+    args: [
+      '--disable-blink-features=AutomationControlled',
+      '--no-sandbox',
+      '--disable-dev-shm-usage'
+    ]
   });
 
   const context = await browser.newContext({
@@ -35,6 +39,30 @@ const fs = require('fs');
   for (const p of pagesToMirror) {
     try {
       console.log("Fetching:", p.url);
+
+      await page.goto(p.url, {
+        waitUntil: 'domcontentloaded',
+        timeout: 60000
+      });
+
+      await page.waitForTimeout(3000);
+
+      try {
+        await page.waitForSelector('table', { timeout: 15000 });
+      } catch (e) {
+        console.log("No table found, saving page anyway.");
+      }
+
+      const html = await page.content();
+      fs.writeFileSync(p.file, html);
+
+    } catch (err) {
+      console.log("Error fetching:", p.url, err);
+    }
+  }
+
+  await browser.close();
+})();      console.log("Fetching:", p.url);
 
       await page.goto(p.url, {
         waitUntil: 'domcontentloaded',
