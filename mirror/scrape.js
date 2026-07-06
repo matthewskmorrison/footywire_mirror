@@ -69,6 +69,41 @@ const fs = require('fs');
 
   await browser.close();
 
+})();      url: `https://www.footywire.com/afl/footy/supercoach_round?year=2026&round=${r}&p=&s=T`,
+      file: `mirror/round_${r}.html`
+    });
+  }
+
+  // Loop through all pages
+  for (const p of pagesToMirror) {
+    try {
+      console.log("Fetching:", p.url);
+
+      await page.goto(p.url, {
+        waitUntil: 'domcontentloaded',
+        timeout: 60000
+      });
+
+      // Allow Cloudflare JS to settle
+      await page.waitForTimeout(3000);
+
+      // Try to wait for a table, but don't crash if missing
+      try {
+        await page.waitForSelector('table', { timeout: 15000 });
+      } catch (e) {
+        console.log("No table found, saving page anyway.");
+      }
+
+      const html = await page.content();
+      fs.writeFileSync(p.file, html);
+
+    } catch (err) {
+      console.log("Error fetching:", p.url, err);
+    }
+  }
+
+  await browser.close();
+
 })();  }
 
   for (const p of pagesToMirror) {
