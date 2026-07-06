@@ -1,0 +1,21 @@
+<html><head>
+    <title></title>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async="" defer=""></script>
+    <script>
+        function onSuccess(token) {
+            document.getElementById('sv').value = token;
+            document.getElementById('verifyForm').submit();
+        }
+    </script>
+</head>
+<body>
+
+<form action="/afl/recaptcha.bot" method="POST" id="verifyForm">
+    <input type="hidden" name="cf-turnstile-response" value="" id="sv">
+</form>
+
+<div class="cf-turnstile" data-sitekey="0x4AAAAAACGZthfksHX6UJc0" data-theme="light" data-size="normal" data-callback="onSuccess"><div><input type="hidden" name="cf-turnstile-response" id="cf-chl-widget-vuw4p_response"></div></div>
+
+
+
+</body></html>
