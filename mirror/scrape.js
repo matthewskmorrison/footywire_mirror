@@ -29,7 +29,8 @@ const fs = require('fs');
       file: "mirror/footywire_prices.html"
     }
   ];
-
+  
+  // Add round pages
   for (let r = 0; r <= 24; r++) {
     pagesToMirror.push({
       url: `https://www.footywire.com/afl/footy/supercoach_round?year=2026&round=${r}&p=&s=T`,
