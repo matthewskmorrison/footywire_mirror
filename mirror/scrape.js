@@ -5,7 +5,7 @@ async function fetchPage(url, file) {
   try {
     const response = await axios.get(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Linux; Android 13; Mobile) Chrome/123 Safari/537.36'
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
       },
       timeout: 30000
     });
