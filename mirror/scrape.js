@@ -22,11 +22,11 @@ async function fetchPage(url, file) {
   const pages = [
     {
       url: "https://www.footywire.com/afl/footy/supercoach_breakevens",
-      file: "mirror/footywire_breakevens.html"
+      file: "footywire_breakevens.html"
     },
     {
       url: "https://www.footywire.com/afl/footy/supercoach_prices",
-      file: "mirror/footywire_prices.html"
+      file: "footywire_prices.html"
     }
   ];
 
@@ -34,7 +34,7 @@ async function fetchPage(url, file) {
   for (let r = 0; r <= 24; r++) {
     pages.push({
       url: `https://www.footywire.com/afl/footy/supercoach_round?year=2026&round=${r}&p=&s=T`,
-      file: `mirror/round_${r}.html`
+      file: `round_${r}.html`
     });
   }
 
